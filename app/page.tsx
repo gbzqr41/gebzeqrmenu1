@@ -24,7 +24,7 @@ export default function Home() {
 
       {/* Hero Slider */}
       <div className="px-[10px]">
-        <div className="h-[300px] bg-gray-300 rounded-[15px]"></div>
+        <div className="h-[230px] bg-gray-300 rounded-[15px]"></div>
       </div>
     </div>
   );
