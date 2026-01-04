@@ -31,7 +31,7 @@ export default function Home() {
 
       {/* Hero Slider */}
       <div className="px-[10px]">
-        <div className="h-[230px] rounded-[15px] overflow-hidden">
+        <div className="h-[230px] rounded-[15px] overflow-hidden relative">
           <video
             src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@arafatjunayed6_1767550314.mp4"
             className="w-full h-full object-cover"
@@ -40,6 +40,9 @@ export default function Home() {
             muted
             playsInline
           />
+          <div className="absolute inset-0 p-[20px] flex items-center justify-center">
+            <p className="text-white text-base font-bold">YILBAŞINA ÖZEL İNDİRİMLER</p>
+          </div>
         </div>
       </div>
 
