@@ -1,10 +1,12 @@
 "use client";
 
-import { Info, Search, Star } from "lucide-react";
+import { Info, Search, Star, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
@@ -36,6 +38,21 @@ export default function Home() {
       document.removeEventListener('click', handleInteraction);
     };
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchOpen) {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.search-container')) {
+          setSearchOpen(false);
+          setSearchValue("");
+        }
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [searchOpen]);
 
   return (
     <div className="min-h-screen">
@@ -86,26 +103,64 @@ export default function Home() {
           scrollbarWidth: 'none'
         }}
       >
-        <div className="flex gap-1.5 min-w-max">
-          {/* Search Button */}
-          <button className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none" style={{ borderColor: 'rgb(239 239 239)' }}>
-            <Search className="w-5 h-5" />
-          </button>
-
-          {categories.map((category) => (
+        {searchOpen ? (
+          <div className="flex gap-1.5 search-container">
             <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`h-[42px] px-[18px] rounded-full whitespace-nowrap text-sm font-semibold flex items-center border transition-colors select-none ${activeCategory === category
-                ? 'bg-black text-white border-black'
-                : 'bg-white text-gray-700'
-                }`}
-              style={activeCategory === category ? {} : { borderColor: 'rgb(239 239 239)' }}
+              onClick={() => {
+                setSearchOpen(false);
+                setSearchValue("");
+              }}
+              className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none"
+              style={{ borderColor: 'rgb(239 239 239)' }}
             >
-              {category}
+              <Search className="w-5 h-5" />
             </button>
-          ))}
-        </div>
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                placeholder="Menüde ara"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                className="w-full h-[42px] px-[18px] bg-white text-gray-700 border rounded-full text-sm outline-none transition-opacity duration-200"
+                style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px' }}
+                autoFocus
+              />
+              {searchValue && (
+                <button
+                  onClick={() => setSearchValue("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="flex gap-1.5 min-w-max">
+            {/* Search Button */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none"
+              style={{ borderColor: 'rgb(239 239 239)' }}
+            >
+              <Search className="w-5 h-5" />
+            </button>
+
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`h-[42px] px-[18px] rounded-full whitespace-nowrap text-sm font-semibold flex items-center border transition-colors select-none ${activeCategory === category
+                  ? 'bg-black text-white border-black'
+                  : 'bg-white text-gray-700'
+                  }`}
+                style={activeCategory === category ? {} : { borderColor: 'rgb(239 239 239)' }}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Category Title */}
