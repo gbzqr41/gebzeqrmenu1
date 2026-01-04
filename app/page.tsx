@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, MoveLeft, MoveRight } from "lucide-react";
+import { Info, Search, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -10,23 +10,8 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const baslangiclarRef = useRef<HTMLDivElement>(null);
   const anaYemeklerRef = useRef<HTMLDivElement>(null);
-  const discountedScrollRef = useRef<HTMLDivElement>(null);
 
   const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
-
-  const scrollDiscounted = (direction: 'left' | 'right') => {
-    if (discountedScrollRef.current) {
-      const scrollAmount = 300;
-      const newScrollPosition = direction === 'left'
-        ? discountedScrollRef.current.scrollLeft - scrollAmount
-        : discountedScrollRef.current.scrollLeft + scrollAmount;
-
-      discountedScrollRef.current.scrollTo({
-        left: newScrollPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   const scrollToCategory = (categoryName: string) => {
     let targetRef = null;
@@ -290,26 +275,11 @@ export default function Home() {
 
       {/* İndirimli Ürünler */}
       <div className="mt-6">
-        <div className="px-[10px] flex items-center justify-between">
+        <div className="px-[10px]">
           <h2 className="text-gray-900 font-semibold text-lg">İndirimli Ürünler</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={() => scrollDiscounted('left')}
-              className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-            >
-              <MoveLeft className="w-4 h-4 text-gray-700" />
-            </button>
-            <button
-              onClick={() => scrollDiscounted('right')}
-              className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-            >
-              <MoveRight className="w-4 h-4 text-gray-700" />
-            </button>
-          </div>
         </div>
 
         <div
-          ref={discountedScrollRef}
           className="overflow-x-auto px-[10px] mt-4"
           style={{
             msOverflowStyle: 'none',
@@ -347,6 +317,7 @@ export default function Home() {
         <>
           <div ref={baslangiclarRef} className="px-[10px] mt-6">
             <h2 className="text-gray-900 font-semibold text-lg">Başlangıçlar</h2>
+            <p className="text-gray-500 text-sm mt-1">{filteredMenuItems.length} ürün</p>
           </div>
 
           {/* Menu Card */}
@@ -382,6 +353,7 @@ export default function Home() {
         <>
           <div ref={anaYemeklerRef} className="px-[10px] mt-6">
             <h2 className="text-gray-900 font-semibold text-lg">Ana Yemekler</h2>
+            <p className="text-gray-500 text-sm mt-1">{filteredMenuItems.length} ürün</p>
           </div>
 
           {/* Menu Card 2 */}
