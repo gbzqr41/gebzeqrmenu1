@@ -10,11 +10,31 @@ export default function Home() {
   const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(err => {
-        console.log("Video autoplay failed:", err);
-      });
-    }
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(err => {
+          console.log("Video autoplay failed:", err);
+        });
+      }
+    };
+
+    // Hemen dene
+    playVideo();
+
+    // User interaction olursa tekrar dene
+    const handleInteraction = () => {
+      playVideo();
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('click', handleInteraction);
+    };
+
+    document.addEventListener('touchstart', handleInteraction, { once: true });
+    document.addEventListener('click', handleInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('click', handleInteraction);
+    };
   }, []);
 
   return (
@@ -71,9 +91,9 @@ export default function Home() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm ${activeCategory === category
+              className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm font-semibold ${activeCategory === category
                 ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-700 border border-gray-300'
+                : 'bg-white text-gray-700 border border-gray-300'
                 }`}
             >
               {category}
