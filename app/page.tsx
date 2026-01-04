@@ -1,12 +1,21 @@
 "use client";
 
 import { Info, Search, Star } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log("Video autoplay failed:", err);
+      });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -33,14 +42,17 @@ export default function Home() {
       <div className="px-[10px]">
         <div className="h-[230px] rounded-[15px] overflow-hidden relative">
           <video
+            ref={videoRef}
             src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@arafatjunayed6_1767550314.mp4"
             className="w-full h-full object-cover"
             autoPlay
             loop
             muted
             playsInline
+            webkit-playsinline="true"
           />
-          <div className="absolute inset-0 p-[20px] flex items-center justify-center">
+          <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-black to-transparent"></div>
+          <div className="absolute bottom-0 left-0 p-[20px]">
             <p className="text-white text-base font-bold">YILBAŞINA ÖZEL İNDİRİMLER</p>
           </div>
         </div>
@@ -60,8 +72,8 @@ export default function Home() {
               key={category}
               onClick={() => setActiveCategory(category)}
               className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm ${activeCategory === category
-                ? 'bg-gray-900 text-white'
-                : 'bg-gray-100 text-gray-700'
+                ? 'bg-black text-white'
+                : 'bg-gray-100 text-gray-700 border border-gray-300'
                 }`}
             >
               {category}
