@@ -50,9 +50,6 @@ export default function Home() {
         {/* Right Side */}
         <div className="flex items-center gap-2">
           <div className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center">
-            <Search className="w-5 h-5 text-gray-700" />
-          </div>
-          <div className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center">
             <Star className="w-5 h-5 text-gray-700" />
           </div>
         </div>
@@ -87,14 +84,20 @@ export default function Home() {
         }}
       >
         <div className="flex gap-2 min-w-max">
+          {/* Search Button */}
+          <button className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center" style={{ borderColor: 'rgb(245 245 245)' }}>
+            <Search className="w-5 h-5" />
+          </button>
+
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm font-semibold ${activeCategory === category
+              className={`h-[42px] px-[18px] rounded-lg whitespace-nowrap text-sm font-semibold flex items-center ${activeCategory === category
                 ? 'bg-black text-white'
-                : 'bg-white text-gray-700 border border-gray-300'
+                : 'bg-white text-gray-700 border'
                 }`}
+              style={activeCategory === category ? {} : { borderColor: 'rgb(245 245 245)' }}
             >
               {category}
             </button>
