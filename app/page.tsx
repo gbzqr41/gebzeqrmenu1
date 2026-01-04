@@ -287,23 +287,29 @@ export default function Home() {
         >
           <div className="flex gap-2 min-w-max pr-[10px]">
             {[
-              { id: 'd1', name: 'The Big Boss', price: 350, oldPrice: 440, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
-              { id: 'd2', name: 'Double Cheese', price: 420, oldPrice: 490, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
-              { id: 'd3', name: 'Mega Burger', price: 380, oldPrice: 450, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
-              { id: 'd4', name: 'Chicken Special', price: 340, oldPrice: 410, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
-              { id: 'd5', name: 'Deluxe Supreme', price: 460, oldPrice: 530, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
-              { id: 'd6', name: 'Classic BBQ', price: 390, oldPrice: 450, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' }
+              { id: 'd1', name: 'The Big Boss', price: 350, type: 'video', media: 'https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@camaleaoburgers_1767562826.mp4' },
+              { id: 'd2', name: 'Double Cheese', price: 420, type: 'video', media: 'https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@meat_coin_1767562815.mp4' },
+              { id: 'd3', name: 'Mega Burger', price: 380, type: 'video', media: 'https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@pinchofyum_1767562803.mp4' },
+              { id: 'd4', name: 'Chicken Special', price: 340, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd5', name: 'Deluxe Supreme', price: 460, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd6', name: 'Classic BBQ', price: 390, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' }
             ].map((item) => (
-              <div key={item.id} className="w-[140px] bg-white p-[5px] flex flex-col rounded-[10px] border flex-shrink-0" style={{ borderColor: 'rgb(245 245 245)' }}>
-                <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
-                </div>
-                <div className="flex flex-col p-[10px] gap-1">
-                  <h3 className="text-gray-900 font-semibold text-sm">{item.name}</h3>
-                  <div className="flex items-center gap-2">
-                    <p className="text-gray-900 font-bold text-sm">{item.price} TL</p>
-                    <p className="text-red-500 text-xs line-through">{item.oldPrice} TL</p>
-                  </div>
+              <div key={item.id} className="w-[140px] h-[180px] bg-gray-50 p-[5px] rounded-[10px] flex-shrink-0 relative overflow-hidden">
+                {item.type === 'video' ? (
+                  <video
+                    src={item.media}
+                    className="absolute inset-0 w-full h-full object-cover rounded-[10px]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : (
+                  <img src={item.media} alt={item.name} className="absolute inset-0 w-full h-full object-cover rounded-[10px]" />
+                )}
+                <div className="absolute bottom-0 left-0 right-0 p-[10px] bg-gradient-to-t from-black/60 to-transparent">
+                  <h3 className="text-white font-semibold text-sm">{item.name}</h3>
+                  <p className="text-white font-bold text-sm">{item.price} TL</p>
                 </div>
               </div>
             ))}
