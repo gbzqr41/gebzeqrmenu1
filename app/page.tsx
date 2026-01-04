@@ -36,25 +36,33 @@ export default function Home() {
       <div className="px-[10px] mt-4 flex gap-2">
         <div className="flex-1 bg-white p-[10px] flex flex-col rounded-[15px]">
           {/* Top - Image */}
-          <div className="w-full h-[100px] bg-gray-300 rounded-[10px]"></div>
+          <div className="w-full h-[100px] rounded-[10px] overflow-hidden">
+            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/unnamed.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
+          </div>
 
           {/* Bottom - Content */}
           <div className="flex flex-col p-[10px]">
             <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
             <p className="text-gray-600 text-sm">80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan</p>
-            <p className="text-gray-900 font-semibold">440 TL</p>
+            <div className="bg-gray-200 inline-block px-2 py-1 rounded mt-1">
+              <p className="text-gray-900 font-semibold">440 TL</p>
+            </div>
           </div>
         </div>
 
         <div className="flex-1 bg-white p-[10px] flex flex-col rounded-[15px]">
           {/* Top - Image */}
-          <div className="w-full h-[100px] bg-gray-300 rounded-[10px]"></div>
+          <div className="w-full h-[100px] rounded-[10px] overflow-hidden">
+            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/unnamed.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
+          </div>
 
           {/* Bottom - Content */}
           <div className="flex flex-col p-[10px]">
             <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
             <p className="text-gray-600 text-sm">80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan</p>
-            <p className="text-gray-900 font-semibold">440 TL</p>
+            <div className="bg-gray-200 inline-block px-2 py-1 rounded mt-1">
+              <p className="text-gray-900 font-semibold">440 TL</p>
+            </div>
           </div>
         </div>
       </div>
