@@ -37,7 +37,7 @@ export default function Home() {
         <div className="flex-1 bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
           {/* Top - Image */}
           <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/unnamed.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
+            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
           </div>
 
           {/* Bottom - Content */}
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="flex-1 bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
           {/* Top - Image */}
           <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/unnamed.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
+            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
           </div>
 
           {/* Bottom - Content */}
