@@ -104,39 +104,27 @@ export default function Home() {
         }}
       >
         {searchOpen ? (
-          <div className="flex gap-1.5 search-container">
-            <button
-              onClick={() => {
-                setSearchOpen(false);
-                setSearchValue("");
-              }}
-              className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none"
-              style={{ borderColor: 'rgb(239 239 239)' }}
-            >
-              <Search className="w-5 h-5" />
-            </button>
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                placeholder="Menüde ara"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full h-[42px] px-[18px] bg-white text-gray-700 border rounded-full text-sm outline-none transition-opacity duration-200"
-                style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px' }}
-                autoFocus
-              />
-              {searchValue && (
-                <button
-                  onClick={() => setSearchValue("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
+          <div className="search-container animate-in w-full relative">
+            <input
+              type="text"
+              placeholder="Ara"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              className="w-full h-[42px] px-[18px] bg-white text-black font-semibold border rounded-full text-sm outline-none"
+              style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px' }}
+              autoFocus
+            />
+            {searchValue && (
+              <button
+                onClick={() => setSearchValue("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         ) : (
-          <div className="flex gap-1.5 min-w-max">
+          <div className="flex gap-1.5 min-w-max pr-[10px]">
             {/* Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
