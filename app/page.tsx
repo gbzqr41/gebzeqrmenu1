@@ -31,7 +31,16 @@ export default function Home() {
 
       {/* Hero Slider */}
       <div className="px-[10px]">
-        <div className="h-[230px] bg-gray-300 rounded-[15px]"></div>
+        <div className="h-[230px] rounded-[15px] overflow-hidden">
+          <video
+            src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@arafatjunayed6_1767550314.mp4"
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        </div>
       </div>
 
       {/* Category Buttons */}
@@ -48,8 +57,8 @@ export default function Home() {
               key={category}
               onClick={() => setActiveCategory(category)}
               className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm ${activeCategory === category
-                  ? 'bg-gray-900 text-white'
-                  : 'bg-gray-100 text-gray-700'
+                ? 'bg-gray-900 text-white'
+                : 'bg-gray-100 text-gray-700'
                 }`}
             >
               {category}
