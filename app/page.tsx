@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, Star, X } from "lucide-react";
+import { Info, Search, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -114,8 +114,92 @@ export default function Home() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [searchOpen]);
 
+  useEffect(() => {
+    if (searchOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [searchOpen]);
+
   return (
     <div className="min-h-screen">
+      {/* Search Popup */}
+      {searchOpen && (
+        <div className="fixed inset-0 bg-white z-50 search-container animate-in">
+          <div className="h-full flex flex-col">
+            {/* Search Header */}
+            <div className="h-[60px] flex items-center px-[10px] border-b" style={{ borderColor: 'rgb(239 239 239)' }}>
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  placeholder="Ara"
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  onFocus={(e) => {
+                    e.preventDefault();
+                  }}
+                  className="w-full h-[42px] px-[18px] bg-gray-50 text-black font-semibold border rounded-full outline-none"
+                  style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px', fontSize: '16px' }}
+                  autoFocus
+                />
+                {searchValue && (
+                  <button
+                    onClick={() => setSearchValue("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+              <button
+                onClick={() => {
+                  setSearchOpen(false);
+                  setSearchValue("");
+                }}
+                className="ml-3 text-gray-700 font-semibold"
+              >
+                İptal
+              </button>
+            </div>
+
+            {/* Search Results */}
+            <div className="flex-1 overflow-y-auto">
+              {filteredMenuItems.length > 0 ? (
+                <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
+                  {filteredMenuItems.map((item) => (
+                    <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+                      <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
+                      </div>
+                      <div className="flex flex-col p-[10px] gap-1">
+                        <h3 className="text-gray-900 font-semibold">{item.name}</h3>
+                        <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
+                        {item.oldPrice ? (
+                          <div className="flex items-center gap-2">
+                            <p className="text-gray-900 font-bold">{item.price} TL</p>
+                            <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
+                          </div>
+                        ) : (
+                          <p className="text-gray-900 font-bold">{item.price} TL</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : searchValue ? (
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-gray-500">Sonuç bulunamadı</p>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="h-[60px] flex items-center justify-between px-[10px]">
         {/* Left Side */}
@@ -126,8 +210,11 @@ export default function Home() {
 
         {/* Right Side */}
         <div className="flex items-center gap-2">
-          <div className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center">
-            <Star className="w-5 h-5 text-gray-700" />
+          <div
+            onClick={() => setSearchOpen(true)}
+            className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+          >
+            <Search className="w-5 h-5 text-gray-700" />
           </div>
         </div>
       </header>
@@ -163,62 +250,26 @@ export default function Home() {
           scrollbarWidth: 'none'
         }}
       >
-        {searchOpen ? (
-          <div className="search-container animate-in w-full relative">
-            <input
-              type="text"
-              placeholder="Ara"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              onFocus={(e) => {
-                e.preventDefault();
-                const scrollY = window.scrollY;
-                setTimeout(() => window.scrollTo(0, scrollY), 0);
-              }}
-              className="w-full h-[42px] px-[18px] bg-white text-black font-semibold border rounded-full outline-none"
-              style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px', fontSize: '16px' }}
-              autoFocus
-            />
-            {searchValue && (
-              <button
-                onClick={() => setSearchValue("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="flex gap-1.5 min-w-max pr-[10px]">
-            {/* Search Button */}
+        <div className="flex gap-1.5 min-w-max pr-[10px]">
+          {categories.map((category) => (
             <button
-              onClick={() => setSearchOpen(true)}
-              className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none"
-              style={{ borderColor: 'rgb(239 239 239)' }}
+              key={category}
+              onClick={() => {
+                setActiveCategory(category);
+                if (category === "Başlangıçlar" || category === "Ana Yemekler") {
+                  scrollToCategory(category);
+                }
+              }}
+              className={`h-[42px] px-[18px] rounded-full whitespace-nowrap font-semibold flex items-center border transition-colors select-none ${activeCategory === category
+                ? 'bg-black text-white border-black'
+                : 'bg-white text-gray-700'
+                }`}
+              style={activeCategory === category ? { fontSize: '14px' } : { borderColor: 'rgb(239 239 239)', fontSize: '14px' }}
             >
-              <Search className="w-5 h-5" />
+              {category}
             </button>
-
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => {
-                  setActiveCategory(category);
-                  if (category === "Başlangıçlar" || category === "Ana Yemekler") {
-                    scrollToCategory(category);
-                  }
-                }}
-                className={`h-[42px] px-[18px] rounded-full whitespace-nowrap font-semibold flex items-center border transition-colors select-none ${activeCategory === category
-                  ? 'bg-black text-white border-black'
-                  : 'bg-white text-gray-700'
-                  }`}
-                style={activeCategory === category ? { fontSize: '14px' } : { borderColor: 'rgb(239 239 239)', fontSize: '14px' }}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        )}
+          ))}
+        </div>
       </div>
 
       {/* Category Title */}
