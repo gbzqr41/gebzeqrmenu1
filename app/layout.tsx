@@ -19,6 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          .overflow-x-auto::-webkit-scrollbar {
+            display: none;
+          }
+        `}} />
+      </head>
       <body className={`${plusJakartaSans.className} bg-gray-50 antialiased`}>
         {children}
       </body>

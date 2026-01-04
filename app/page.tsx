@@ -1,6 +1,13 @@
+"use client";
+
 import { Info, Search, Star } from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
+
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -25,6 +32,30 @@ export default function Home() {
       {/* Hero Slider */}
       <div className="px-[10px]">
         <div className="h-[230px] bg-gray-300 rounded-[15px]"></div>
+      </div>
+
+      {/* Category Buttons */}
+      <div
+        className="overflow-x-auto px-[10px] mt-4"
+        style={{
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none'
+        }}
+      >
+        <div className="flex gap-2 min-w-max">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm ${activeCategory === category
+                  ? 'bg-gray-900 text-white'
+                  : 'bg-gray-100 text-gray-700'
+                }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Category Title */}
