@@ -8,8 +8,26 @@ export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const baslangiclarRef = useRef<HTMLDivElement>(null);
+  const anaYemeklerRef = useRef<HTMLDivElement>(null);
 
   const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
+
+  const scrollToCategory = (categoryName: string) => {
+    let targetRef = null;
+
+    if (categoryName === "Başlangıçlar") {
+      targetRef = baslangiclarRef.current;
+    } else if (categoryName === "Ana Yemekler") {
+      targetRef = anaYemeklerRef.current;
+    }
+
+    if (targetRef) {
+      const yOffset = -70; // Header/butonlar için offset
+      const y = targetRef.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   const menuItems = [
     {
@@ -26,6 +44,22 @@ export default function Home() {
       description: "Özel harman dana köfte, cheddar peyniri, dana bacon",
       price: 440,
       oldPrice: null,
+      image: "https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg"
+    },
+    {
+      id: 3,
+      name: "Chicken Deluxe",
+      description: "Çıtır tavuk göğsü, marul, domates, özel sos ile hazırlanan lezzetli tavuklu burger",
+      price: 380,
+      oldPrice: null,
+      image: "https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg"
+    },
+    {
+      id: 4,
+      name: "Double Cheese",
+      description: "İki kat dana köfte, üç kat cheddar peyniri ile peynir severler için özel tarif",
+      price: 420,
+      oldPrice: 490,
       image: "https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg"
     }
   ];
@@ -163,7 +197,12 @@ export default function Home() {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => {
+                  setActiveCategory(category);
+                  if (category === "Başlangıçlar" || category === "Ana Yemekler") {
+                    scrollToCategory(category);
+                  }
+                }}
                 className={`h-[42px] px-[18px] rounded-full whitespace-nowrap text-sm font-semibold flex items-center border transition-colors select-none ${activeCategory === category
                   ? 'bg-black text-white border-black'
                   : 'bg-white text-gray-700'
@@ -178,14 +217,45 @@ export default function Home() {
       </div>
 
       {/* Category Title */}
-      <div className="px-[10px] mt-6">
-        <h2 className="text-gray-900 font-semibold text-lg">Efsane Klasikler</h2>
+      <div ref={baslangiclarRef} className="px-[10px] mt-6">
+        <h2 className="text-gray-900 font-semibold text-lg">Başlangıçlar</h2>
       </div>
 
       {/* Menu Card */}
       <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
         {filteredMenuItems.map((item) => (
           <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+            {/* Top - Image */}
+            <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
+              <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
+            </div>
+
+            {/* Bottom - Content */}
+            <div className="flex flex-col p-[10px] gap-1">
+              <h3 className="text-gray-900 font-semibold">{item.name}</h3>
+              <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
+              {item.oldPrice ? (
+                <div className="flex items-center gap-2">
+                  <p className="text-gray-900 font-bold">{item.price} TL</p>
+                  <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
+                </div>
+              ) : (
+                <p className="text-gray-900 font-bold">{item.price} TL</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Category Title 2 */}
+      <div ref={anaYemeklerRef} className="px-[10px] mt-6">
+        <h2 className="text-gray-900 font-semibold text-lg">Ana Yemekler</h2>
+      </div>
+
+      {/* Menu Card 2 */}
+      <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
+        {filteredMenuItems.map((item) => (
+          <div key={`new-${item.id}`} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
             {/* Top - Image */}
             <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
               <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
