@@ -67,6 +67,9 @@ export default function Home() {
             muted
             playsInline
             webkit-playsinline="true"
+            style={{
+              objectFit: 'cover'
+            }}
           />
           <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-black to-transparent"></div>
           <div className="absolute bottom-0 left-0 p-[20px]">
@@ -83,9 +86,9 @@ export default function Home() {
           scrollbarWidth: 'none'
         }}
       >
-        <div className="flex gap-2 min-w-max">
+        <div className="flex gap-1.5 min-w-max">
           {/* Search Button */}
-          <button className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none" style={{ borderColor: 'rgb(230 230 230)' }}>
+          <button className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none" style={{ borderColor: 'rgb(239 239 239)' }}>
             <Search className="w-5 h-5" />
           </button>
 
@@ -97,7 +100,7 @@ export default function Home() {
                 ? 'bg-black text-white border-black'
                 : 'bg-white text-gray-700'
                 }`}
-              style={activeCategory === category ? {} : { borderColor: 'rgb(230 230 230)' }}
+              style={activeCategory === category ? {} : { borderColor: 'rgb(239 239 239)' }}
             >
               {category}
             </button>
@@ -119,12 +122,12 @@ export default function Home() {
           </div>
 
           {/* Bottom - Content */}
-          <div className="flex flex-col p-[15px] gap-1">
+          <div className="flex flex-col p-[10px] gap-1">
             <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
             <p className="text-gray-500 text-xs leading-tight line-clamp-3">80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan ile lezzetli bir hamburger deneyimi yaşayın</p>
             <div className="flex items-center gap-2">
               <p className="text-gray-900 font-bold">350 TL</p>
-              <p className="text-gray-400 text-sm line-through">440 TL</p>
+              <p className="text-red-500 text-sm line-through">440 TL</p>
             </div>
           </div>
         </div>
@@ -136,7 +139,7 @@ export default function Home() {
           </div>
 
           {/* Bottom - Content */}
-          <div className="flex flex-col p-[15px] gap-1">
+          <div className="flex flex-col p-[10px] gap-1">
             <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
             <p className="text-gray-500 text-xs leading-tight line-clamp-3">Özel harman dana köfte, cheddar peyniri, dana bacon</p>
             <p className="text-gray-900 font-bold">440 TL</p>
