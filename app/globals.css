@@ -24,7 +24,7 @@ video::-webkit-media-controls-enclosure {
 @keyframes slideIn {
     0% {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.99);
     }
 
     100% {
@@ -34,7 +34,7 @@ video::-webkit-media-controls-enclosure {
 }
 
 .animate-in {
-    animation: slideIn 0.15s ease-out forwards;
+    animation: slideIn 0.08s ease-out forwards;
 }
 
 html::-webkit-scrollbar,

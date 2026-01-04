@@ -126,7 +126,7 @@ export default function Home() {
   }, [searchOpen]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-6">
       {/* Search Popup */}
       {searchOpen && (
         <div className="fixed inset-0 bg-white z-50 search-container animate-in">
@@ -168,7 +168,7 @@ export default function Home() {
 
             {/* Search Results */}
             <div className="flex-1 overflow-y-auto">
-              {filteredMenuItems.length > 0 ? (
+              {searchValue && filteredMenuItems.length > 0 ? (
                 <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
                   {filteredMenuItems.map((item) => (
                     <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
@@ -269,6 +269,45 @@ export default function Home() {
               {category}
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* İndirimli Ürünler */}
+      <div className="mt-6">
+        <div className="px-[10px]">
+          <h2 className="text-gray-900 font-semibold text-lg">İndirimli Ürünler</h2>
+        </div>
+
+        <div
+          className="overflow-x-auto px-[10px] mt-4"
+          style={{
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none'
+          }}
+        >
+          <div className="flex gap-2 min-w-max pr-[10px]">
+            {[
+              { id: 'd1', name: 'The Big Boss', price: 350, oldPrice: 440, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd2', name: 'Double Cheese', price: 420, oldPrice: 490, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd3', name: 'Mega Burger', price: 380, oldPrice: 450, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd4', name: 'Chicken Special', price: 340, oldPrice: 410, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd5', name: 'Deluxe Supreme', price: 460, oldPrice: 530, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
+              { id: 'd6', name: 'Classic BBQ', price: 390, oldPrice: 450, image: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' }
+            ].map((item) => (
+              <div key={item.id} className="w-[140px] bg-white p-[5px] flex flex-col rounded-[10px] border flex-shrink-0" style={{ borderColor: 'rgb(245 245 245)' }}>
+                <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
+                </div>
+                <div className="flex flex-col p-[10px] gap-1">
+                  <h3 className="text-gray-900 font-semibold text-sm">{item.name}</h3>
+                  <div className="flex items-center gap-2">
+                    <p className="text-gray-900 font-bold text-sm">{item.price} TL</p>
+                    <p className="text-red-500 text-xs line-through">{item.oldPrice} TL</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
