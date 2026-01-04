@@ -33,17 +33,29 @@ export default function Home() {
       </div>
 
       {/* Menu Card */}
-      <div className="px-[10px] mt-4">
-        <div className="w-full h-[150px] bg-white p-[15px] flex items-center justify-between rounded-[15px]">
-          {/* Left Side - Content */}
-          <div className="flex flex-col justify-between h-full">
+      <div className="px-[10px] mt-4 flex gap-2">
+        <div className="flex-1 bg-white p-[15px] flex flex-col rounded-[15px]">
+          {/* Top - Image */}
+          <div className="w-full h-[100px] bg-gray-300 rounded-[15px]"></div>
+
+          {/* Bottom - Content */}
+          <div className="flex flex-col mt-2">
             <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
             <p className="text-gray-600 text-sm">80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan</p>
             <p className="text-gray-900 font-semibold">440 TL</p>
           </div>
+        </div>
 
-          {/* Right Side - Image */}
-          <div className="w-[100px] h-full bg-gray-300 rounded-[15px] ml-4"></div>
+        <div className="flex-1 bg-white p-[15px] flex flex-col rounded-[15px]">
+          {/* Top - Image */}
+          <div className="w-full h-[100px] bg-gray-300 rounded-[15px]"></div>
+
+          {/* Bottom - Content */}
+          <div className="flex flex-col mt-2">
+            <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
+            <p className="text-gray-600 text-sm">80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan</p>
+            <p className="text-gray-900 font-semibold">440 TL</p>
+          </div>
         </div>
       </div>
     </div>
