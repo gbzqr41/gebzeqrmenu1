@@ -11,6 +11,32 @@ export default function Home() {
 
   const categories = ["Başlangıçlar", "Ana Yemekler", "Burgerler", "Pizzalar", "Salatalar", "İçecekler", "Tatlılar"];
 
+  const menuItems = [
+    {
+      id: 1,
+      name: "The Big Boss",
+      description: "80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan ile lezzetli bir hamburger deneyimi yaşayın",
+      price: 350,
+      oldPrice: 440,
+      image: "https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg"
+    },
+    {
+      id: 2,
+      name: "Klasik Burger",
+      description: "Özel harman dana köfte, cheddar peyniri, dana bacon",
+      price: 440,
+      oldPrice: null,
+      image: "https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg"
+    }
+  ];
+
+  const filteredMenuItems = searchValue
+    ? menuItems.filter(item =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    : menuItems;
+
   useEffect(() => {
     const playVideo = () => {
       if (videoRef.current) {
@@ -157,37 +183,29 @@ export default function Home() {
       </div>
 
       {/* Menu Card */}
-      <div className="px-[10px] mt-4 flex gap-2">
-        <div className="flex-1 bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
-          {/* Top - Image */}
-          <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
-          </div>
+      <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
+        {filteredMenuItems.map((item) => (
+          <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+            {/* Top - Image */}
+            <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
+              <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
+            </div>
 
-          {/* Bottom - Content */}
-          <div className="flex flex-col p-[10px] gap-1">
-            <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
-            <p className="text-gray-500 text-xs leading-tight line-clamp-3">80 gr. özel harman dana köfte, çift kat cheddar peyniri, çıtır dana bacon, karamelize soğan ile lezzetli bir hamburger deneyimi yaşayın</p>
-            <div className="flex items-center gap-2">
-              <p className="text-gray-900 font-bold">350 TL</p>
-              <p className="text-red-500 text-sm line-through">440 TL</p>
+            {/* Bottom - Content */}
+            <div className="flex flex-col p-[10px] gap-1">
+              <h3 className="text-gray-900 font-semibold">{item.name}</h3>
+              <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
+              {item.oldPrice ? (
+                <div className="flex items-center gap-2">
+                  <p className="text-gray-900 font-bold">{item.price} TL</p>
+                  <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
+                </div>
+              ) : (
+                <p className="text-gray-900 font-bold">{item.price} TL</p>
+              )}
             </div>
           </div>
-        </div>
-
-        <div className="flex-1 bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
-          {/* Top - Image */}
-          <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-            <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="The Big Boss" className="w-full h-full object-cover object-center" />
-          </div>
-
-          {/* Bottom - Content */}
-          <div className="flex flex-col p-[10px] gap-1">
-            <h3 className="text-gray-900 font-semibold">The Big Boss</h3>
-            <p className="text-gray-500 text-xs leading-tight line-clamp-3">Özel harman dana köfte, cheddar peyniri, dana bacon</p>
-            <p className="text-gray-900 font-bold">440 TL</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
