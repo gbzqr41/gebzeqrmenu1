@@ -85,7 +85,7 @@ export default function Home() {
       >
         <div className="flex gap-2 min-w-max">
           {/* Search Button */}
-          <button className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center" style={{ borderColor: 'rgb(245 245 245)' }}>
+          <button className="w-[42px] h-[42px] bg-white text-gray-700 border rounded-full flex items-center justify-center transition-colors select-none" style={{ borderColor: 'rgb(230 230 230)' }}>
             <Search className="w-5 h-5" />
           </button>
 
@@ -93,11 +93,11 @@ export default function Home() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`h-[42px] px-[18px] rounded-lg whitespace-nowrap text-sm font-semibold flex items-center ${activeCategory === category
-                ? 'bg-black text-white'
-                : 'bg-white text-gray-700 border'
+              className={`h-[42px] px-[18px] rounded-full whitespace-nowrap text-sm font-semibold flex items-center border transition-colors select-none ${activeCategory === category
+                ? 'bg-black text-white border-black'
+                : 'bg-white text-gray-700'
                 }`}
-              style={activeCategory === category ? {} : { borderColor: 'rgb(245 245 245)' }}
+              style={activeCategory === category ? {} : { borderColor: 'rgb(230 230 230)' }}
             >
               {category}
             </button>
