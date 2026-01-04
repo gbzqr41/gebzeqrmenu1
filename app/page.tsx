@@ -269,7 +269,6 @@ export default function Home() {
               {category}
             </button>
           ))}
-          ```
         </div>
       </div>
 
