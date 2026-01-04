@@ -36,3 +36,12 @@ video::-webkit-media-controls-enclosure {
 .animate-in {
     animation: slideIn 0.15s ease-out forwards;
 }
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

@@ -157,7 +157,7 @@ export default function Home() {
 
       {/* Category Buttons */}
       <div
-        className="overflow-x-auto px-[10px] mt-4"
+        className="overflow-x-auto px-[10px] mt-4 sticky top-0 bg-gray-50 z-10 py-2"
         style={{
           msOverflowStyle: 'none',
           scrollbarWidth: 'none'
@@ -170,8 +170,13 @@ export default function Home() {
               placeholder="Ara"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              className="w-full h-[42px] px-[18px] bg-white text-black font-semibold border rounded-full text-sm outline-none"
-              style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px' }}
+              onFocus={(e) => {
+                e.preventDefault();
+                const scrollY = window.scrollY;
+                setTimeout(() => window.scrollTo(0, scrollY), 0);
+              }}
+              className="w-full h-[42px] px-[18px] bg-white text-black font-semibold border rounded-full outline-none"
+              style={{ borderColor: 'rgb(239 239 239)', paddingRight: searchValue ? '45px' : '18px', fontSize: '16px' }}
               autoFocus
             />
             {searchValue && (
@@ -203,11 +208,11 @@ export default function Home() {
                     scrollToCategory(category);
                   }
                 }}
-                className={`h-[42px] px-[18px] rounded-full whitespace-nowrap text-sm font-semibold flex items-center border transition-colors select-none ${activeCategory === category
+                className={`h-[42px] px-[18px] rounded-full whitespace-nowrap font-semibold flex items-center border transition-colors select-none ${activeCategory === category
                   ? 'bg-black text-white border-black'
                   : 'bg-white text-gray-700'
                   }`}
-                style={activeCategory === category ? {} : { borderColor: 'rgb(239 239 239)' }}
+                style={activeCategory === category ? { fontSize: '14px' } : { borderColor: 'rgb(239 239 239)', fontSize: '14px' }}
               >
                 {category}
               </button>
@@ -217,66 +222,74 @@ export default function Home() {
       </div>
 
       {/* Category Title */}
-      <div ref={baslangiclarRef} className="px-[10px] mt-6">
-        <h2 className="text-gray-900 font-semibold text-lg">Başlangıçlar</h2>
-      </div>
-
-      {/* Menu Card */}
-      <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
-        {filteredMenuItems.map((item) => (
-          <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
-            {/* Top - Image */}
-            <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-              <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
-            </div>
-
-            {/* Bottom - Content */}
-            <div className="flex flex-col p-[10px] gap-1">
-              <h3 className="text-gray-900 font-semibold">{item.name}</h3>
-              <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
-              {item.oldPrice ? (
-                <div className="flex items-center gap-2">
-                  <p className="text-gray-900 font-bold">{item.price} TL</p>
-                  <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
-                </div>
-              ) : (
-                <p className="text-gray-900 font-bold">{item.price} TL</p>
-              )}
-            </div>
+      {filteredMenuItems.length > 0 && (
+        <>
+          <div ref={baslangiclarRef} className="px-[10px] mt-6">
+            <h2 className="text-gray-900 font-semibold text-lg">Başlangıçlar</h2>
           </div>
-        ))}
-      </div>
+
+          {/* Menu Card */}
+          <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
+            {filteredMenuItems.map((item) => (
+              <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+                {/* Top - Image */}
+                <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
+                </div>
+
+                {/* Bottom - Content */}
+                <div className="flex flex-col p-[10px] gap-1">
+                  <h3 className="text-gray-900 font-semibold">{item.name}</h3>
+                  <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
+                  {item.oldPrice ? (
+                    <div className="flex items-center gap-2">
+                      <p className="text-gray-900 font-bold">{item.price} TL</p>
+                      <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
+                    </div>
+                  ) : (
+                    <p className="text-gray-900 font-bold">{item.price} TL</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Category Title 2 */}
-      <div ref={anaYemeklerRef} className="px-[10px] mt-6">
-        <h2 className="text-gray-900 font-semibold text-lg">Ana Yemekler</h2>
-      </div>
-
-      {/* Menu Card 2 */}
-      <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
-        {filteredMenuItems.map((item) => (
-          <div key={`new-${item.id}`} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
-            {/* Top - Image */}
-            <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
-              <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
-            </div>
-
-            {/* Bottom - Content */}
-            <div className="flex flex-col p-[10px] gap-1">
-              <h3 className="text-gray-900 font-semibold">{item.name}</h3>
-              <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
-              {item.oldPrice ? (
-                <div className="flex items-center gap-2">
-                  <p className="text-gray-900 font-bold">{item.price} TL</p>
-                  <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
-                </div>
-              ) : (
-                <p className="text-gray-900 font-bold">{item.price} TL</p>
-              )}
-            </div>
+      {filteredMenuItems.length > 0 && (
+        <>
+          <div ref={anaYemeklerRef} className="px-[10px] mt-6">
+            <h2 className="text-gray-900 font-semibold text-lg">Ana Yemekler</h2>
           </div>
-        ))}
-      </div>
+
+          {/* Menu Card 2 */}
+          <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
+            {filteredMenuItems.map((item) => (
+              <div key={`new-${item.id}`} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+                {/* Top - Image */}
+                <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
+                </div>
+
+                {/* Bottom - Content */}
+                <div className="flex flex-col p-[10px] gap-1">
+                  <h3 className="text-gray-900 font-semibold">{item.name}</h3>
+                  <p className="text-gray-500 text-xs leading-tight line-clamp-3">{item.description}</p>
+                  {item.oldPrice ? (
+                    <div className="flex items-center gap-2">
+                      <p className="text-gray-900 font-bold">{item.price} TL</p>
+                      <p className="text-red-500 text-sm line-through">{item.oldPrice} TL</p>
+                    </div>
+                  ) : (
+                    <p className="text-gray-900 font-bold">{item.price} TL</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
