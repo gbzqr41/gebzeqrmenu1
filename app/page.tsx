@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -242,23 +242,34 @@ export default function Home() {
 
       {/* Hero Slider */}
       <div className="px-[10px]">
-        <div className="h-[230px] rounded-[15px] overflow-hidden relative">
-          <video
-            ref={videoRef}
-            src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@arafatjunayed6_1767550314.mp4"
-            className="w-full h-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            webkit-playsinline="true"
-            style={{
-              objectFit: 'cover'
-            }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-black to-transparent"></div>
-          <div className="absolute bottom-0 left-0 p-[20px]">
-            <p className="text-white text-base font-bold">YILBAŞINA ÖZEL İNDİRİMLER</p>
+        <div className="relative">
+          <div className="h-[230px] rounded-[15px] overflow-hidden relative">
+            <video
+              ref={videoRef}
+              src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@arafatjunayed6_1767550314.mp4"
+              className="w-full h-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+              webkit-playsinline="true"
+              style={{
+                objectFit: 'cover'
+              }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-black to-transparent"></div>
+            <div className="absolute bottom-0 left-0 p-[20px]">
+              <p className="text-white text-base font-bold">YILBAŞINA ÖZEL İNDİRİMLER</p>
+              <p className="text-white text-sm mt-1">Lezzetin tadını çıkarın, özel kampanyalardan yararlanın</p>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full backdrop-blur-sm bg-white/30 flex items-center justify-center">
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full backdrop-blur-sm bg-white/30 flex items-center justify-center">
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
           </div>
         </div>
       </div>
