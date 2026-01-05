@@ -315,22 +315,24 @@ export default function Home() {
               { id: 'd5', name: 'Deluxe Supreme', price: 460, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
               { id: 'd6', name: 'Classic BBQ', price: 390, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' }
             ].map((item) => (
-              <div key={item.id} className="w-[140px] h-[180px] bg-gray-50 p-[5px] rounded-[10px] flex-shrink-0 relative overflow-hidden">
-                {item.type === 'video' ? (
-                  <video
-                    src={item.media}
-                    className="absolute inset-0 w-full h-full object-cover rounded-[10px]"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : (
-                  <img src={item.media} alt={item.name} className="absolute inset-0 w-full h-full object-cover rounded-[10px]" />
-                )}
-                <div className="absolute bottom-0 left-0 right-0 p-[10px] bg-gradient-to-t from-black/60 to-transparent">
-                  <h3 className="text-white font-semibold text-sm">{item.name}</h3>
-                  <p className="text-white font-bold text-sm">{item.price} TL</p>
+              <div key={item.id} className="w-[140px] bg-gray-50 p-[5px] rounded-[10px] flex-shrink-0 flex flex-col">
+                <div className="w-full h-[130px] rounded-[5px] overflow-hidden">
+                  {item.type === 'video' ? (
+                    <video
+                      src={item.media}
+                      className="w-full h-full object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
+                  ) : (
+                    <img src={item.media} alt={item.name} className="w-full h-full object-cover" />
+                  )}
+                </div>
+                <div className="p-[10px] flex flex-col gap-1">
+                  <h3 className="text-gray-900 font-semibold text-sm">{item.name}</h3>
+                  <p className="text-gray-900 font-bold text-sm">{item.price} TL</p>
                 </div>
               </div>
             ))}
