@@ -1,12 +1,13 @@
 "use client";
 
-import { Info, Search, X } from "lucide-react";
+import { Info, Search, X, ArrowUp } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const baslangiclarRef = useRef<HTMLDivElement>(null);
   const anaYemeklerRef = useRef<HTMLDivElement>(null);
@@ -124,6 +125,26 @@ export default function Home() {
       document.body.style.overflow = 'unset';
     };
   }, [searchOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <div className="min-h-screen pb-6">
@@ -387,6 +408,16 @@ export default function Home() {
             ))}
           </div>
         </>
+      )}
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-[20px] right-[20px] w-[42px] h-[42px] bg-black rounded-full flex items-center justify-center z-40 transition-opacity"
+        >
+          <ArrowUp className="w-5 h-5 text-white" />
+        </button>
       )}
     </div>
   );
