@@ -626,7 +626,7 @@ export default function Home() {
 
       {/* Category Buttons */}
       <div
-        className="overflow-x-auto px-[10px] mt-4 sticky top-0 bg-gray-50 z-10 py-2"
+        className="overflow-x-auto px-[10px] mt-4 sticky top-0 bg-gray-50 z-10 py-2 shadow-sm"
         style={{
           msOverflowStyle: 'none',
           scrollbarWidth: 'none'
