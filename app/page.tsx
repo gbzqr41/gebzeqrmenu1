@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter, MapPin } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -165,10 +165,13 @@ export default function Home() {
             {/* Profile Image - 230px height */}
             <div className="w-full h-[230px] relative">
               <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Resital Lounge" className="w-full h-full object-cover object-center" />
-              {/* Logo Overlay - 100x100 circle */}
-              <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2">
-                <div className="w-[100px] h-[100px] rounded-full bg-black flex items-center justify-center">
-                  <p className="text-white font-bold text-xl">RESITAL</p>
+              {/* Logo Overlay - 100x100 circle with hamburger background */}
+              <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 z-20">
+                <div className="w-[100px] h-[100px] rounded-full overflow-hidden relative shadow-xl border-4 border-white">
+                  <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Logo" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                    <p className="text-white font-bold text-lg">RESITAL</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -179,66 +182,127 @@ export default function Home() {
               <h1 className="text-gray-900 font-bold text-2xl text-center">Resital Lounge</h1>
 
               {/* Description - Left aligned */}
-              <p className="text-gray-600 text-sm leading-relaxed mt-4 text-left">Modern ve şık atmosferiyle misafirlerine unutulmaz deneyimler sunan Resital Lounge, kaliteli yemek ve içecek seçenekleriyle hizmet vermektedir.</p>
+              <p className="text-gray-600 text-sm leading-relaxed mt-4 text-left">Modern ve şık atmosferiyle misafirlerine unutulmaz deneyimler sunan Resital Lounge, kaliteli yemek ve içecek seçenekleriyle hizmet vermektedir. Profesyonel ekibimiz ve benzersiz ambiyansımızla size özel anlar yaşatmak için buradayız. Aileniz ve arkadaşlarınızla keyifli vakit geçirebileceğiniz sıcak bir ortam sunuyoruz.</p>
 
               {/* Amenities Cards - 2 column grid */}
               <div className="mt-6 grid grid-cols-2 gap-3">
-                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
-                  <ChefHat className="w-5 h-5 text-gray-700" />
-                  <p className="text-gray-900 font-semibold text-sm">Mutfaklar</p>
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <ChefHat className="w-5 h-5 text-orange-500" />
+                    <p className="text-gray-900 font-semibold text-sm">Mutfaklar</p>
+                  </div>
+                  <p className="text-gray-500 text-xs mt-1">İtalyan, Türk, Amerikan</p>
                 </div>
-                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
-                  <Cigarette className="w-5 h-5 text-red-500" />
-                  <p className="text-gray-900 font-semibold text-sm">Sigara İçilmez</p>
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Cigarette className="w-5 h-5 text-red-500" />
+                    <p className="text-gray-900 font-semibold text-sm">Sigara İçilmez</p>
+                  </div>
+                  <p className="text-gray-500 text-xs mt-1">Tümüyle dumansız</p>
                 </div>
-                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
-                  <Baby className="w-5 h-5 text-gray-700" />
-                  <p className="text-gray-900 font-semibold text-sm">Çocuk Alanı</p>
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Baby className="w-5 h-5 text-blue-500" />
+                    <p className="text-gray-900 font-semibold text-sm">Çocuk Alanı</p>
+                  </div>
+                  <p className="text-gray-500 text-xs mt-1">Oyun alanı mevcut</p>
                 </div>
-                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
-                  <ParkingCircle className="w-5 h-5 text-gray-700" />
-                  <p className="text-gray-900 font-semibold text-sm">Park Var</p>
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <ParkingCircle className="w-5 h-5 text-green-600" />
+                    <p className="text-gray-900 font-semibold text-sm">Park Var</p>
+                  </div>
+                  <p className="text-gray-500 text-xs mt-1">Vale hizmet</p>
                 </div>
               </div>
 
               {/* Info Cards */}
-              <div className="mt-4 space-y-3">
-                {/* Gallery */}
-                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
-                  <Images className="w-5 h-5 text-gray-700" />
-                  <div>
+              <div className="mt-6 space-y-4">
+                {/* Gallery - Horizontal Scroll */}
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Images className="w-5 h-5 text-purple-600" />
                     <p className="text-gray-900 font-semibold text-sm">Galeri</p>
-                    <p className="text-gray-500 text-xs">24 fotoğraf</p>
+                  </div>
+                  <div className="overflow-x-auto scrollbar-hide" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+                    <div className="flex gap-2 min-w-max">
+                      {['https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg',
+                        'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/unnamed.jpg',
+                        'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg',
+                        'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/unnamed.jpg',
+                        'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg'
+                      ].map((img, idx) => (
+                        <div key={idx} className="w-[100px] h-[100px] rounded-[12px] overflow-hidden flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
+                          <img src={img} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover" />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                {/* Hours */}
-                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-gray-700" />
-                  <div>
-                    <p className="text-gray-900 font-semibold text-sm">Çalışma Saati</p>
-                    <p className="text-gray-500 text-xs">Pazartesi-Pazar: 10:00 - 23:00</p>
+                {/* Hours - Detailed */}
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Calendar className="w-5 h-5 text-blue-600" />
+                    <p className="text-gray-900 font-semibold text-sm">Çalışma Saatleri</p>
+                  </div>
+                  <div className="space-y-1.5">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Pazartesi - Perşembe</span>
+                      <span className="text-gray-900 font-semibold">10:00 - 23:00</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Cuma - Cumartesi</span>
+                      <span className="text-gray-900 font-semibold">10:00 - 01:00</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Pazar</span>
+                      <span className="text-gray-900 font-semibold">10:00 - 23:00</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* WiFi */}
-                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
-                  <Wifi className="w-5 h-5 text-gray-700" />
-                  <div>
-                    <p className="text-gray-900 font-semibold text-sm">WiFi Şifre</p>
-                    <p className="text-gray-500 text-xs">resital2024</p>
+                {/* WiFi - Enhanced */}
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-[20px] border border-blue-100 shadow-sm">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                      <Wifi className="w-4 h-4 text-white" />
+                    </div>
+                    <p className="text-gray-900 font-bold text-sm">WiFi Bilgileri</p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <p className="text-gray-600 text-xs">Ağ Adı:</p>
+                      <p className="text-gray-900 font-semibold text-xs">Resital-Guest</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-gray-600 text-xs">Şifre:</p>
+                      <p className="text-gray-900 font-semibold text-xs">resital2024</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Contact Info */}
               <div className="mt-4 space-y-3">
-                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-gray-700" />
+                {/* Address */}
+                <div className="bg-white p-4 rounded-[20px] shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-red-500 mt-0.5" />
+                    <div className="flex-1">
+                      <p className="text-gray-900 font-semibold text-sm mb-1">Adres</p>
+                      <p className="text-gray-600 text-xs leading-relaxed">Mustafa Kemal Mah. Ataşehir Blv. No:142 Gebze/Kocaeli</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Phone */}
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3 shadow-sm">
+                  <Phone className="w-5 h-5 text-green-600" />
                   <p className="text-gray-900 font-semibold text-sm">+90 555 123 45 67</p>
                 </div>
-                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
-                  <Globe className="w-5 h-5 text-gray-700" />
+                {/* Website */}
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3 shadow-sm">
+                  <Globe className="w-5 h-5 text-indigo-600" />
                   <p className="text-gray-900 font-semibold text-sm">www.resitallounge.com</p>
                 </div>
               </div>
