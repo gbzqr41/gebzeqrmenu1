@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -385,12 +385,19 @@ export default function Home() {
                   scrollToCategory(category);
                 }
               }}
-              className={`h-[42px] px-[18px] rounded-full whitespace-nowrap font-semibold flex items-center border transition-colors select-none ${activeCategory === category
+              className={`h-[42px] px-[18px] rounded-full whitespace-nowrap font-semibold flex items-center gap-2 border transition-colors select-none ${activeCategory === category
                 ? 'bg-black text-white border-black'
                 : 'bg-white text-gray-700'
                 }`}
               style={activeCategory === category ? { fontSize: '14px' } : { borderColor: 'rgb(239 239 239)', fontSize: '14px' }}
             >
+              {category === "Başlangıçlar" && <Ham className="w-4 h-4" />}
+              {category === "Ana Yemekler" && <Utensils className="w-4 h-4" />}
+              {category === "Burgerler" && <Ham className="w-4 h-4" />}
+              {category === "Pizzalar" && <Pizza className="w-4 h-4" />}
+              {category === "Salatalar" && <Salad className="w-4 h-4" />}
+              {category === "İçecekler" && <Coffee className="w-4 h-4" />}
+              {category === "Tatlılar" && <Cake className="w-4 h-4" />}
               {category}
             </button>
           ))}
@@ -460,6 +467,10 @@ export default function Home() {
       {filteredMenuItems.length > 0 && (
         <>
           <div ref={baslangiclarRef} className="px-[10px] mt-6">
+            {/* Category Image */}
+            <div className="w-full h-[100px] rounded-[10px] overflow-hidden mb-3">
+              <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Başlangıçlar" className="w-full h-full object-cover" />
+            </div>
             <h2 className="text-gray-900 font-semibold text-lg">Başlangıçlar</h2>
             <p className="text-gray-500 text-sm mt-1">{filteredMenuItems.length} ürün</p>
           </div>
@@ -490,6 +501,21 @@ export default function Home() {
                   ) : (
                     <p className="text-gray-900 font-bold">{item.price} TL</p>
                   )}
+                  {/* Detail Icons */}
+                  <div className="flex items-center gap-3 mt-2">
+                    <div className="flex items-center gap-1">
+                      <Wheat className="w-3.5 h-3.5 text-gray-400" />
+                      <p className="text-gray-400 text-xs">Var</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Flame className="w-3.5 h-3.5 text-gray-400" />
+                      <p className="text-gray-400 text-xs">650</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-gray-400" />
+                      <p className="text-gray-400 text-xs">15-20 dk</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -501,6 +527,10 @@ export default function Home() {
       {filteredMenuItems.length > 0 && (
         <>
           <div ref={anaYemeklerRef} className="px-[10px] mt-6">
+            {/* Category Image */}
+            <div className="w-full h-[100px] rounded-[10px] overflow-hidden mb-3">
+              <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Ana Yemekler" className="w-full h-full object-cover" />
+            </div>
             <h2 className="text-gray-900 font-semibold text-lg">Ana Yemekler</h2>
             <p className="text-gray-500 text-sm mt-1">{filteredMenuItems.length} ürün</p>
           </div>
@@ -531,6 +561,21 @@ export default function Home() {
                   ) : (
                     <p className="text-gray-900 font-bold">{item.price} TL</p>
                   )}
+                  {/* Detail Icons */}
+                  <div className="flex items-center gap-3 mt-2">
+                    <div className="flex items-center gap-1">
+                      <Wheat className="w-3.5 h-3.5 text-gray-400" />
+                      <p className="text-gray-400 text-xs">Var</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Flame className="w-3.5 h-3.5 text-gray-400" />
+                      <p className="text-gray-400 text-xs">650</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-gray-400" />
+                      <p className="text-gray-400 text-xs">15-20 dk</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
