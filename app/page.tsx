@@ -468,7 +468,7 @@ export default function Home() {
         <>
           <div ref={baslangiclarRef} className="px-[10px] mt-6">
             {/* Category Image */}
-            <div className="w-full h-[100px] rounded-[10px] overflow-hidden mb-3">
+            <div className="w-full h-[125px] rounded-[10px] overflow-hidden mb-3">
               <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Başlangıçlar" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-gray-900 font-semibold text-lg">Başlangıçlar</h2>
@@ -504,16 +504,12 @@ export default function Home() {
                   {/* Detail Icons */}
                   <div className="flex items-center gap-3 mt-2">
                     <div className="flex items-center gap-1">
-                      <Wheat className="w-3.5 h-3.5 text-gray-400" />
-                      <p className="text-gray-400 text-xs">Var</p>
-                    </div>
-                    <div className="flex items-center gap-1">
                       <Flame className="w-3.5 h-3.5 text-gray-400" />
                       <p className="text-gray-400 text-xs">650</p>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5 text-gray-400" />
-                      <p className="text-gray-400 text-xs">15-20 dk</p>
+                      <p className="text-gray-400 text-xs">20 dk</p>
                     </div>
                   </div>
                 </div>
@@ -528,7 +524,7 @@ export default function Home() {
         <>
           <div ref={anaYemeklerRef} className="px-[10px] mt-6">
             {/* Category Image */}
-            <div className="w-full h-[100px] rounded-[10px] overflow-hidden mb-3">
+            <div className="w-full h-[125px] rounded-[10px] overflow-hidden mb-3">
               <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Ana Yemekler" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-gray-900 font-semibold text-lg">Ana Yemekler</h2>
