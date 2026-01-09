@@ -572,6 +572,16 @@ export default function Home() {
         {/* Right Side */}
         <div className="flex items-center gap-2">
           <div
+            className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+          >
+            <Languages className="w-5 h-5 text-gray-700" />
+          </div>
+          <div
+            className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+          >
+            <Star className="w-5 h-5 text-gray-700" />
+          </div>
+          <div
             onClick={() => setSearchOpen(true)}
             className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
           >
