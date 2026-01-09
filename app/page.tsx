@@ -560,16 +560,12 @@ export default function Home() {
                   {/* Detail Icons */}
                   <div className="flex items-center gap-3 mt-2">
                     <div className="flex items-center gap-1">
-                      <Wheat className="w-3.5 h-3.5 text-gray-400" />
-                      <p className="text-gray-400 text-xs">Var</p>
-                    </div>
-                    <div className="flex items-center gap-1">
                       <Flame className="w-3.5 h-3.5 text-gray-400" />
                       <p className="text-gray-400 text-xs">650</p>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5 text-gray-400" />
-                      <p className="text-gray-400 text-xs">15-20 dk</p>
+                      <p className="text-gray-400 text-xs">20 dk</p>
                     </div>
                   </div>
                 </div>
