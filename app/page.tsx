@@ -177,45 +177,6 @@ export default function Home() {
                 <p className="text-gray-600 text-sm leading-relaxed">{selectedProduct.description}</p>
               </div>
 
-              {/* Product Details Grid */}
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                {/* Hazırlama Süresi */}
-                <div className="bg-white p-3 rounded-[15px]">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Clock className="w-4 h-4 text-gray-400" />
-                    <p className="text-gray-500 text-xs">Hazırlama Süresi</p>
-                  </div>
-                  <p className="text-gray-900 font-semibold text-sm">15-20 dk</p>
-                </div>
-
-                {/* Kalori */}
-                <div className="bg-white p-3 rounded-[15px]">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Flame className="w-4 h-4 text-orange-500" />
-                    <p className="text-gray-500 text-xs">Kalori</p>
-                  </div>
-                  <p className="text-gray-900 font-semibold text-sm">650 kcal</p>
-                </div>
-
-                {/* Alerjen */}
-                <div className="bg-white p-3 rounded-[15px]">
-                  <div className="flex items-center gap-2 mb-1">
-                    <AlertTriangle className="w-4 h-4 text-amber-500" />
-                    <p className="text-gray-500 text-xs">Alerjen</p>
-                  </div>
-                  <p className="text-gray-900 font-semibold text-sm">Süt, Gluten</p>
-                </div>
-
-                {/* Gluten */}
-                <div className="bg-white p-3 rounded-[15px]">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Wheat className="w-4 h-4 text-yellow-600" />
-                    <p className="text-gray-500 text-xs">Gluten</p>
-                  </div>
-                  <p className="text-gray-900 font-semibold text-sm">Var</p>
-                </div>
-              </div>
-
               {/* Price */}
               <div className="mt-6">
                 {selectedProduct.oldPrice ? (
@@ -226,6 +187,45 @@ export default function Home() {
                 ) : (
                   <p className="text-gray-900 font-bold text-2xl">{selectedProduct.price} TL</p>
                 )}
+              </div>
+
+              {/* Product Details - 3 Column Grid */}
+              <div className="mt-6 grid grid-cols-3 gap-2">
+                {/* Hazırlama Süresi */}
+                <div className="bg-white p-3 rounded-[20px]">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Clock className="w-4 h-4 text-black" />
+                    <p className="text-gray-500 text-xs">Hazırlama</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">15-20 dk</p>
+                </div>
+
+                {/* Kalori */}
+                <div className="bg-white p-3 rounded-[20px]">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Flame className="w-4 h-4 text-black" />
+                    <p className="text-gray-500 text-xs">Kalori</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">650 kcal</p>
+                </div>
+
+                {/* Gluten */}
+                <div className="bg-white p-3 rounded-[20px]">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Wheat className="w-4 h-4 text-black" />
+                    <p className="text-gray-500 text-xs">Gluten</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">Var</p>
+                </div>
+              </div>
+
+              {/* Alerjen - Full Width with Yellow Gradient */}
+              <div className="mt-4 bg-gradient-to-r from-yellow-100 to-amber-100 p-4 rounded-[20px] border border-yellow-200">
+                <div className="flex items-center gap-2 mb-1">
+                  <AlertTriangle className="w-4 h-4 text-black" />
+                  <p className="text-gray-700 font-semibold text-sm">Alerjen</p>
+                </div>
+                <p className="text-gray-900 font-semibold text-sm">Süt, Gluten</p>
               </div>
             </div>
           </div>
