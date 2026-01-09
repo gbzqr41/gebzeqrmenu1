@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -8,6 +8,7 @@ export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<typeof menuItems[0] | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const baslangiclarRef = useRef<HTMLDivElement>(null);
   const anaYemeklerRef = useRef<HTMLDivElement>(null);
@@ -116,7 +117,7 @@ export default function Home() {
   }, [searchOpen]);
 
   useEffect(() => {
-    if (searchOpen) {
+    if (searchOpen || selectedProduct) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -124,7 +125,7 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [searchOpen]);
+  }, [searchOpen, selectedProduct]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,6 +149,89 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-6">
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-white z-50 animate-in">
+          <div className="h-full flex flex-col overflow-y-auto">
+            {/* Close Button - Fixed Top Left */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="fixed top-4 left-4 w-[42px] h-[42px] bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors z-10 shadow-lg"
+            >
+              <X className="w-5 h-5 text-gray-700" />
+            </button>
+
+            {/* Product Image - Full Width */}
+            <div className="w-full h-[300px]">
+              <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover object-center" />
+            </div>
+
+            {/* Content Card with Rounded Top */}
+            <div className="bg-gray-50 rounded-t-[20px] -mt-[20px] relative px-[20px] pt-[24px] pb-[40px] flex-1">
+              {/* Product Name */}
+              <h1 className="text-gray-900 font-bold text-2xl">{selectedProduct.name}</h1>
+
+              {/* Açıklama Section */}
+              <div className="mt-4">
+                <h3 className="text-gray-700 font-semibold text-sm mb-2">Açıklama</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{selectedProduct.description}</p>
+              </div>
+
+              {/* Product Details Grid */}
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                {/* Hazırlama Süresi */}
+                <div className="bg-white p-3 rounded-[15px]">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Clock className="w-4 h-4 text-gray-400" />
+                    <p className="text-gray-500 text-xs">Hazırlama Süresi</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">15-20 dk</p>
+                </div>
+
+                {/* Kalori */}
+                <div className="bg-white p-3 rounded-[15px]">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Flame className="w-4 h-4 text-orange-500" />
+                    <p className="text-gray-500 text-xs">Kalori</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">650 kcal</p>
+                </div>
+
+                {/* Alerjen */}
+                <div className="bg-white p-3 rounded-[15px]">
+                  <div className="flex items-center gap-2 mb-1">
+                    <AlertTriangle className="w-4 h-4 text-amber-500" />
+                    <p className="text-gray-500 text-xs">Alerjen</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">Süt, Gluten</p>
+                </div>
+
+                {/* Gluten */}
+                <div className="bg-white p-3 rounded-[15px]">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Wheat className="w-4 h-4 text-yellow-600" />
+                    <p className="text-gray-500 text-xs">Gluten</p>
+                  </div>
+                  <p className="text-gray-900 font-semibold text-sm">Var</p>
+                </div>
+              </div>
+
+              {/* Price */}
+              <div className="mt-6">
+                {selectedProduct.oldPrice ? (
+                  <div className="flex items-center gap-3">
+                    <p className="text-gray-900 font-bold text-2xl">{selectedProduct.price} TL</p>
+                    <p className="text-red-500 text-xl line-through">{selectedProduct.oldPrice} TL</p>
+                  </div>
+                ) : (
+                  <p className="text-gray-900 font-bold text-2xl">{selectedProduct.price} TL</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Search Popup */}
       {searchOpen && (
         <div className="fixed inset-0 bg-white z-50 search-container animate-in">
@@ -192,7 +276,16 @@ export default function Home() {
               {searchValue && filteredMenuItems.length > 0 ? (
                 <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
                   {filteredMenuItems.map((item) => (
-                    <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+                    <div
+                      key={item.id}
+                      onClick={() => {
+                        setSelectedProduct(item);
+                        setSearchOpen(false);
+                        setSearchValue("");
+                      }}
+                      className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border cursor-pointer"
+                      style={{ borderColor: 'rgb(245 245 245)' }}
+                    >
                       <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
                         <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
                       </div>
@@ -326,7 +419,18 @@ export default function Home() {
               { id: 'd5', name: 'Deluxe Supreme', description: 'Premium', price: 460, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' },
               { id: 'd6', name: 'Classic BBQ', description: 'BBQ soslu', price: 390, type: 'image', media: 'https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg' }
             ].map((item) => (
-              <div key={item.id} className="w-[140px] bg-gray-50 p-[5px] rounded-[10px] flex-shrink-0 flex flex-col">
+              <div
+                key={item.id}
+                onClick={() => setSelectedProduct({
+                  id: parseInt(item.id.replace('d', '')),
+                  name: item.name,
+                  description: item.description,
+                  price: item.price,
+                  oldPrice: null,
+                  image: item.media
+                })}
+                className="w-[140px] bg-gray-50 p-[5px] rounded-[10px] flex-shrink-0 flex flex-col cursor-pointer"
+              >
                 <div className="w-full h-[130px] rounded-[5px] overflow-hidden">
                   {item.type === 'video' ? (
                     <video
@@ -363,7 +467,12 @@ export default function Home() {
           {/* Menu Card */}
           <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
             {filteredMenuItems.map((item) => (
-              <div key={item.id} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+              <div
+                key={item.id}
+                onClick={() => setSelectedProduct(item)}
+                className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border cursor-pointer"
+                style={{ borderColor: 'rgb(245 245 245)' }}
+              >
                 {/* Top - Image */}
                 <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
@@ -399,7 +508,12 @@ export default function Home() {
           {/* Menu Card 2 */}
           <div className="px-[10px] mt-4 flex gap-2 flex-wrap">
             {filteredMenuItems.map((item) => (
-              <div key={`new-${item.id}`} className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border" style={{ borderColor: 'rgb(245 245 245)' }}>
+              <div
+                key={`new-${item.id}`}
+                onClick={() => setSelectedProduct(item)}
+                className="w-[calc(50%-4px)] bg-white p-[5px] flex flex-col rounded-[10px] border cursor-pointer"
+                style={{ borderColor: 'rgb(245 245 245)' }}
+              >
                 {/* Top - Image */}
                 <div className="w-full h-[100px] rounded-[5px] overflow-hidden">
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
