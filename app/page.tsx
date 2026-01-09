@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -9,6 +9,7 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<typeof menuItems[0] | null>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const baslangiclarRef = useRef<HTMLDivElement>(null);
   const anaYemeklerRef = useRef<HTMLDivElement>(null);
@@ -117,7 +118,7 @@ export default function Home() {
   }, [searchOpen]);
 
   useEffect(() => {
-    if (searchOpen || selectedProduct) {
+    if (searchOpen || selectedProduct || profileOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -125,7 +126,7 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [searchOpen, selectedProduct]);
+  }, [searchOpen, selectedProduct, profileOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -149,6 +150,119 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-6">
+      {/* Business Profile Modal */}
+      {profileOpen && (
+        <div className="fixed inset-0 bg-white z-50 animate-in">
+          <div className="h-full flex flex-col overflow-y-auto">
+            {/* Close Button - Fixed Top Left */}
+            <button
+              onClick={() => setProfileOpen(false)}
+              className="fixed top-4 left-4 w-[42px] h-[42px] bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors z-10 shadow-lg"
+            >
+              <X className="w-5 h-5 text-gray-700" />
+            </button>
+
+            {/* Profile Image - 230px height */}
+            <div className="w-full h-[230px] relative">
+              <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Resital Lounge" className="w-full h-full object-cover object-center" />
+              {/* Logo Overlay - 100x100 circle */}
+              <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2">
+                <div className="w-[100px] h-[100px] rounded-full bg-black flex items-center justify-center">
+                  <p className="text-white font-bold text-xl">RESITAL</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Card */}
+            <div className="bg-gray-50 rounded-t-[20px] -mt-[20px] relative px-[20px] pt-[70px] pb-[40px] flex-1">
+              {/* Business Name - Centered */}
+              <h1 className="text-gray-900 font-bold text-2xl text-center">Resital Lounge</h1>
+
+              {/* Description - Left aligned */}
+              <p className="text-gray-600 text-sm leading-relaxed mt-4 text-left">Modern ve şık atmosferiyle misafirlerine unutulmaz deneyimler sunan Resital Lounge, kaliteli yemek ve içecek seçenekleriyle hizmet vermektedir.</p>
+
+              {/* Amenities Cards - 2 column grid */}
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
+                  <ChefHat className="w-5 h-5 text-gray-700" />
+                  <p className="text-gray-900 font-semibold text-sm">Mutfaklar</p>
+                </div>
+                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
+                  <Cigarette className="w-5 h-5 text-red-500" />
+                  <p className="text-gray-900 font-semibold text-sm">Sigara İçilmez</p>
+                </div>
+                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
+                  <Baby className="w-5 h-5 text-gray-700" />
+                  <p className="text-gray-900 font-semibold text-sm">Çocuk Alanı</p>
+                </div>
+                <div className="bg-white p-3 rounded-[20px] flex items-center gap-2">
+                  <ParkingCircle className="w-5 h-5 text-gray-700" />
+                  <p className="text-gray-900 font-semibold text-sm">Park Var</p>
+                </div>
+              </div>
+
+              {/* Info Cards */}
+              <div className="mt-4 space-y-3">
+                {/* Gallery */}
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
+                  <Images className="w-5 h-5 text-gray-700" />
+                  <div>
+                    <p className="text-gray-900 font-semibold text-sm">Galeri</p>
+                    <p className="text-gray-500 text-xs">24 fotoğraf</p>
+                  </div>
+                </div>
+
+                {/* Hours */}
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-gray-700" />
+                  <div>
+                    <p className="text-gray-900 font-semibold text-sm">Çalışma Saati</p>
+                    <p className="text-gray-500 text-xs">Pazartesi-Pazar: 10:00 - 23:00</p>
+                  </div>
+                </div>
+
+                {/* WiFi */}
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
+                  <Wifi className="w-5 h-5 text-gray-700" />
+                  <div>
+                    <p className="text-gray-900 font-semibold text-sm">WiFi Şifre</p>
+                    <p className="text-gray-500 text-xs">resital2024</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="mt-4 space-y-3">
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-gray-700" />
+                  <p className="text-gray-900 font-semibold text-sm">+90 555 123 45 67</p>
+                </div>
+                <div className="bg-white p-4 rounded-[20px] flex items-center gap-3">
+                  <Globe className="w-5 h-5 text-gray-700" />
+                  <p className="text-gray-900 font-semibold text-sm">www.resitallounge.com</p>
+                </div>
+              </div>
+
+              {/* Social Media */}
+              <div className="mt-6">
+                <p className="text-gray-700 font-semibold text-sm mb-3">Sosyal Medya</p>
+                <div className="flex gap-3">
+                  <div className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors">
+                    <Facebook className="w-5 h-5 text-gray-700" />
+                  </div>
+                  <div className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors">
+                    <Instagram className="w-5 h-5 text-gray-700" />
+                  </div>
+                  <div className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors">
+                    <Twitter className="w-5 h-5 text-gray-700" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-white z-50 animate-in">
@@ -318,7 +432,7 @@ export default function Home() {
       <header className="h-[60px] flex items-center justify-between px-[10px]">
         {/* Left Side */}
         <div className="flex items-center gap-[10px]">
-          <Info className="w-6 h-6 text-gray-700" />
+          <Info onClick={() => setProfileOpen(true)} className="w-6 h-6 text-gray-700 cursor-pointer" />
           <span className="text-gray-900 font-semibold">Resital Lounge</span>
         </div>
 
