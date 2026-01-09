@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter, MapPin } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter, MapPin, Languages, Star } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -10,6 +10,7 @@ export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<typeof menuItems[0] | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [welcomeScreen, setWelcomeScreen] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const baslangiclarRef = useRef<HTMLDivElement>(null);
   const anaYemeklerRef = useRef<HTMLDivElement>(null);
@@ -118,7 +119,7 @@ export default function Home() {
   }, [searchOpen]);
 
   useEffect(() => {
-    if (searchOpen || selectedProduct || profileOpen) {
+    if (searchOpen || selectedProduct || profileOpen || welcomeScreen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -126,7 +127,7 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [searchOpen, selectedProduct, profileOpen]);
+  }, [searchOpen, selectedProduct, profileOpen, welcomeScreen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -150,6 +151,74 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-6">
+      {/* Welcome Screen */}
+      {welcomeScreen && (
+        <div className="fixed inset-0 z-50 bg-black">
+          {/* Video Background */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@camaleaoburgers_1767562826.mp4" type="video/mp4" />
+          </video>
+
+          {/* Overlay for better text visibility */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Content */}
+          <div className="relative h-full flex flex-col items-center justify-between py-[100px]">
+            {/* Top Section - Logo and Description */}
+            <div className="flex flex-col items-center px-[20px]">
+              {/* Circular Logo */}
+              <div className="w-[100px] h-[100px] rounded-full overflow-hidden relative shadow-2xl border-4 border-white/20 mb-6">
+                <img src="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg" alt="Resital Logo" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                  <p className="text-white font-bold text-lg">RESITAL</p>
+                </div>
+              </div>
+
+              {/* Professional Description */}
+              <h1 className="text-white font-bold text-2xl text-center mb-3">Resital Lounge'a Hoşgeldiniz</h1>
+              <p className="text-white/90 text-center text-sm leading-relaxed max-w-[280px]">Kaliteli lezzetler ve sıcak atmosferiyle size özel anlar yaşatmak için burayız.</p>
+            </div>
+
+            {/* Bottom Section - Action Cards */}
+            <div className="flex gap-3 px-[20px]">
+              {/* Menüye Git Card */}
+              <button
+                onClick={() => setWelcomeScreen(false)}
+                className="flex-1 bg-white/20 backdrop-blur-xl border border-white/30 rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/30 transition-all shadow-lg"
+                style={{ backdropFilter: 'blur(20px)' }}
+              >
+                <Utensils className="w-6 h-6 text-white" />
+                <p className="text-white font-semibold text-sm">Menüye Git</p>
+              </button>
+
+              {/* Değerlendir Card */}
+              <button
+                className="flex-1 bg-white/20 backdrop-blur-xl border border-white/30 rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/30 transition-all shadow-lg"
+                style={{ backdropFilter: 'blur(20px)' }}
+              >
+                <Star className="w-6 h-6 text-white" />
+                <p className="text-white font-semibold text-sm">Değerlendir</p>
+              </button>
+
+              {/* Dil Card */}
+              <button
+                className="flex-1 bg-white/20 backdrop-blur-xl border border-white/30 rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/30 transition-all shadow-lg"
+                style={{ backdropFilter: 'blur(20px)' }}
+              >
+                <Languages className="w-6 h-6 text-white" />
+                <p className="text-white font-semibold text-sm">Dil</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Business Profile Modal */}
       {profileOpen && (
         <div className="fixed inset-0 bg-white z-50 animate-in">
