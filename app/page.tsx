@@ -190,8 +190,8 @@ export default function Home() {
               {/* Menüye Git Card */}
               <button
                 onClick={() => setWelcomeScreen(false)}
-                className="flex-1 bg-white/20 backdrop-blur-xl border border-white/30 rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/30 transition-all shadow-lg"
-                style={{ backdropFilter: 'blur(20px)' }}
+                className="flex-1 bg-white/15 backdrop-blur-2xl rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/25 transition-all shadow-2xl"
+                style={{ backdropFilter: 'blur(40px)' }}
               >
                 <Utensils className="w-6 h-6 text-white" />
                 <p className="text-white font-semibold text-sm">Menüye Git</p>
@@ -199,8 +199,8 @@ export default function Home() {
 
               {/* Değerlendir Card */}
               <button
-                className="flex-1 bg-white/20 backdrop-blur-xl border border-white/30 rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/30 transition-all shadow-lg"
-                style={{ backdropFilter: 'blur(20px)' }}
+                className="flex-1 bg-white/15 backdrop-blur-2xl rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/25 transition-all shadow-2xl"
+                style={{ backdropFilter: 'blur(40px)' }}
               >
                 <Star className="w-6 h-6 text-white" />
                 <p className="text-white font-semibold text-sm">Değerlendir</p>
@@ -208,8 +208,8 @@ export default function Home() {
 
               {/* Dil Card */}
               <button
-                className="flex-1 bg-white/20 backdrop-blur-xl border border-white/30 rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/30 transition-all shadow-lg"
-                style={{ backdropFilter: 'blur(20px)' }}
+                className="flex-1 bg-white/15 backdrop-blur-2xl rounded-[20px] p-4 flex flex-col items-center gap-2 hover:bg-white/25 transition-all shadow-2xl"
+                style={{ backdropFilter: 'blur(40px)' }}
               >
                 <Languages className="w-6 h-6 text-white" />
                 <p className="text-white font-semibold text-sm">Dil</p>
