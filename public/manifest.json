@@ -3,10 +3,12 @@
     "short_name": "Resital Menu",
     "description": "Resital Lounge QR Menu - Kaliteli lezzetler ve sıcak atmosfer",
     "start_url": "/",
-    "display": "standalone",
+    "display": "fullscreen",
     "background_color": "#f9fafb",
     "theme_color": "#000000",
     "orientation": "portrait",
+    "scope": "/",
+    "prefer_related_applications": false,
     "icons": [
         {
             "src": "/icon-192x192.png",
