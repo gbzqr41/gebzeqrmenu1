@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter, MapPin, Languages, Star } from "lucide-react";
+import { Info, Search, X, ArrowUp, ChevronLeft, ChevronRight, Clock, Flame, AlertTriangle, Wheat, Utensils, Pizza, Salad, Coffee, Cake, Ham, ChefHat, Cigarette, Baby, ParkingCircle, Images, Calendar, Wifi, Phone, Globe, Facebook, Instagram, Twitter, MapPin, Languages, Star, Check } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +12,8 @@ export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<typeof menuItems[0] | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("tr");
   const videoRef = useRef<HTMLVideoElement>(null);
   const baslangiclarRef = useRef<HTMLDivElement>(null);
   const anaYemeklerRef = useRef<HTMLDivElement>(null);
@@ -505,6 +507,7 @@ export default function Home() {
         {/* Right Side */}
         <div className="flex items-center gap-2">
           <div
+            onClick={() => setLanguageOpen(true)}
             className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
           >
             <Languages className="w-5 h-5 text-gray-700" />
@@ -594,6 +597,55 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Language Popup */}
+      {languageOpen && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-[20px]">
+          <div className="bg-white rounded-[20px] p-6 w-full max-w-[300px]">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-gray-900 font-bold text-lg">Dil Seçin</h3>
+              <button
+                onClick={() => setLanguageOpen(false)}
+                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+              >
+                <X className="w-4 h-4 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Language Options */}
+            <div className="space-y-2">
+              <button
+                onClick={() => {
+                  setSelectedLanguage("tr");
+                  setLanguageOpen(false);
+                }}
+                className="w-full flex items-center justify-between p-4 rounded-[15px] bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🇹🇷</span>
+                  <span className="text-gray-900 font-semibold">Türkçe</span>
+                </div>
+                {selectedLanguage === "tr" && <Check className="w-5 h-5 text-green-600" />}
+              </button>
+
+              <button
+                onClick={() => {
+                  setSelectedLanguage("en");
+                  setLanguageOpen(false);
+                }}
+                className="w-full flex items-center justify-between p-4 rounded-[15px] bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🇬🇧</span>
+                  <span className="text-gray-900 font-semibold">English</span>
+                </div>
+                {selectedLanguage === "en" && <Check className="w-5 h-5 text-green-600" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* İndirimli Ürünler */}
       <div className="mt-6">

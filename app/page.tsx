@@ -1,10 +1,13 @@
 "use client";
 
-import { Utensils, Star, Languages } from "lucide-react";
+import { Utensils, Star, Languages, X, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function WelcomePage() {
   const router = useRouter();
+  const [languageOpen, setLanguageOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("tr");
 
   return (
     <div className="fixed inset-0 z-50 bg-black">
@@ -59,6 +62,7 @@ export default function WelcomePage() {
 
           {/* Dil Card */}
           <button
+            onClick={() => setLanguageOpen(true)}
             className="w-[110px] h-[100px] bg-white/15 backdrop-blur-2xl rounded-[20px] flex flex-col items-center justify-center gap-2 hover:bg-white/25 transition-all shadow-2xl"
             style={{ backdropFilter: 'blur(40px)' }}
           >
@@ -67,6 +71,55 @@ export default function WelcomePage() {
           </button>
         </div>
       </div>
+
+      {/* Language Popup */}
+      {languageOpen && (
+        <div className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center px-[20px]">
+          <div className="bg-white rounded-[20px] p-6 w-full max-w-[300px]">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-gray-900 font-bold text-lg">Dil Seçin</h3>
+              <button
+                onClick={() => setLanguageOpen(false)}
+                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+              >
+                <X className="w-4 h-4 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Language Options */}
+            <div className="space-y-2">
+              <button
+                onClick={() => {
+                  setSelectedLanguage("tr");
+                  setLanguageOpen(false);
+                }}
+                className="w-full flex items-center justify-between p-4 rounded-[15px] bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🇹🇷</span>
+                  <span className="text-gray-900 font-semibold">Türkçe</span>
+                </div>
+                {selectedLanguage === "tr" && <Check className="w-5 h-5 text-green-600" />}
+              </button>
+
+              <button
+                onClick={() => {
+                  setSelectedLanguage("en");
+                  setLanguageOpen(false);
+                }}
+                className="w-full flex items-center justify-between p-4 rounded-[15px] bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🇬🇧</span>
+                  <span className="text-gray-900 font-semibold">English</span>
+                </div>
+                {selectedLanguage === "en" && <Check className="w-5 h-5 text-green-600" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
