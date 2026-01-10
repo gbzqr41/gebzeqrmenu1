@@ -90,6 +90,10 @@ export default function Home() {
     // Hemen dene
     playVideo();
 
+    // Biraz bekle ve tekrar dene
+    setTimeout(playVideo, 100);
+    setTimeout(playVideo, 500);
+
     // User interaction olursa tekrar dene
     const handleInteraction = () => {
       playVideo();
@@ -343,9 +347,28 @@ export default function Home() {
               <X className="w-5 h-5 text-gray-700" />
             </button>
 
-            {/* Product Image - Full Width */}
+            {/* Product Image/Video - Full Width */}
             <div className="w-full h-[300px]">
-              <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover object-center" />
+              {selectedProduct.image?.includes('.mp4') || selectedProduct.image?.includes('video') ? (
+                <video
+                  src={selectedProduct.image}
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  webkit-playsinline="true"
+                  preload="auto"
+                  onLoadedMetadata={(e) => {
+                    const video = e.currentTarget;
+                    video.play().catch(() => {
+                      setTimeout(() => video.play().catch(() => { }), 100);
+                    });
+                  }}
+                />
+              ) : (
+                <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover object-center" />
+              )}
             </div>
 
             {/* Content Card with Rounded Top */}
