@@ -49,6 +49,7 @@ export default function WelcomePage() {
 
           {/* Değerlendir Card */}
           <button
+            onClick={() => router.push('/review')}
             className="w-[110px] h-[100px] bg-white/15 backdrop-blur-2xl rounded-[20px] flex flex-col items-center justify-center gap-2 hover:bg-white/25 transition-all shadow-2xl"
             style={{ backdropFilter: 'blur(40px)' }}
           >
