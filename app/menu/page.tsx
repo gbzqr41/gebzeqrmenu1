@@ -583,7 +583,8 @@ export default function Home() {
             <video
               ref={videoRef}
               src="https://github.com/gbzqr41/gebzeqrmenu1/raw/refs/heads/main/PinDown.io_@arafatjunayed6_1767550314.mp4"
-              className="w-full h-full object-cover"
+              poster="https://raw.githubusercontent.com/gbzqr41/gebzeqrmenu1/refs/heads/main/23423423.jpg"
+              className="w-full h-full object-cover cursor-pointer"
               autoPlay
               loop
               muted
@@ -601,6 +602,7 @@ export default function Home() {
               onClick={(e) => {
                 const video = e.currentTarget;
                 if (video.paused) {
+                  video.muted = true;
                   video.play().catch(() => { });
                 }
               }}
