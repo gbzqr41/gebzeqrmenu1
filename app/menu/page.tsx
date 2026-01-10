@@ -572,7 +572,7 @@ export default function Home() {
         style={{
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
-          boxShadow: '0 4px 6px -4px rgba(0, 0, 0, 0.1)'
+          boxShadow: '0 8px 12px -2px rgba(0, 0, 0, 0.05)'
         }}
       >
         <div className="flex gap-1.5 min-w-max pr-[10px]">
