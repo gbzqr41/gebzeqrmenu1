@@ -79,34 +79,46 @@ export default function Home() {
     : menuItems;
 
   useEffect(() => {
-    const playVideo = () => {
-      if (videoRef.current) {
-        videoRef.current.play().catch(err => {
-          console.log("Video autoplay failed:", err);
+    const video = videoRef.current;
+    if (!video) return;
+
+    const attemptPlay = () => {
+      video.muted = true;
+      video.play().catch(() => {
+        // Silently fail, will retry
+      });
+    };
+
+    // Intersection Observer for iOS
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            attemptPlay();
+          }
         });
-      }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(video);
+
+    // Initial attempts
+    attemptPlay();
+    setTimeout(attemptPlay, 100);
+    setTimeout(attemptPlay, 500);
+    setTimeout(attemptPlay, 1000);
+
+    // Touch handler for iOS
+    const handleTouch = () => {
+      attemptPlay();
+      document.removeEventListener('touchstart', handleTouch);
     };
-
-    // Hemen dene
-    playVideo();
-
-    // Biraz bekle ve tekrar dene
-    setTimeout(playVideo, 100);
-    setTimeout(playVideo, 500);
-
-    // User interaction olursa tekrar dene
-    const handleInteraction = () => {
-      playVideo();
-      document.removeEventListener('touchstart', handleInteraction);
-      document.removeEventListener('click', handleInteraction);
-    };
-
-    document.addEventListener('touchstart', handleInteraction, { once: true });
-    document.addEventListener('click', handleInteraction, { once: true });
+    document.addEventListener('touchstart', handleTouch, { once: true });
 
     return () => {
-      document.removeEventListener('touchstart', handleInteraction);
-      document.removeEventListener('click', handleInteraction);
+      observer.disconnect();
+      document.removeEventListener('touchstart', handleTouch);
     };
   }, []);
 
@@ -557,8 +569,20 @@ export default function Home() {
               muted
               playsInline
               webkit-playsinline="true"
+              preload="auto"
               style={{
                 objectFit: 'cover'
+              }}
+              onLoadedData={(e) => {
+                const video = e.currentTarget;
+                video.muted = true;
+                video.play().catch(() => { });
+              }}
+              onClick={(e) => {
+                const video = e.currentTarget;
+                if (video.paused) {
+                  video.play().catch(() => { });
+                }
               }}
             />
             <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-black to-transparent"></div>
