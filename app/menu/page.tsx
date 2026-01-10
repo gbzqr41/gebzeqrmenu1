@@ -518,12 +518,6 @@ export default function Home() {
           >
             <Star className="w-5 h-5 text-gray-700" />
           </div>
-          <div
-            onClick={() => setSearchOpen(true)}
-            className="w-[42px] h-[42px] bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
-          >
-            <Search className="w-5 h-5 text-gray-700" />
-          </div>
         </div>
       </header>
 
@@ -559,6 +553,17 @@ export default function Home() {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Search Button */}
+      <div className="px-[10px] mt-4">
+        <button
+          onClick={() => setSearchOpen(true)}
+          className="w-full bg-white border border-gray-200 rounded-[15px] px-4 py-3 flex items-center gap-3 hover:bg-gray-50 transition-colors shadow-sm"
+        >
+          <Search className="w-5 h-5 text-gray-400" />
+          <span className="text-gray-500 text-sm">Menüde ara...</span>
+        </button>
       </div>
 
       {/* Category Buttons */}
