@@ -84,9 +84,12 @@ export default function Home() {
 
     const attemptPlay = () => {
       video.muted = true;
-      video.play().catch(() => {
-        // Silently fail, will retry
-      });
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Will retry
+        });
+      }
     };
 
     // Intersection Observer for iOS
@@ -98,27 +101,44 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.25 }
     );
 
     observer.observe(video);
 
     // Initial attempts
     attemptPlay();
+    setTimeout(attemptPlay, 50);
     setTimeout(attemptPlay, 100);
+    setTimeout(attemptPlay, 300);
     setTimeout(attemptPlay, 500);
     setTimeout(attemptPlay, 1000);
 
-    // Touch handler for iOS
-    const handleTouch = () => {
-      attemptPlay();
-      document.removeEventListener('touchstart', handleTouch);
+    // Visibility change for page refresh/background return
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        attemptPlay();
+      }
     };
-    document.addEventListener('touchstart', handleTouch, { once: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Touch/Click/Scroll handlers for iOS
+    const handleInteraction = () => {
+      attemptPlay();
+    };
+
+    document.addEventListener('touchstart', handleInteraction, { once: true, passive: true });
+    document.addEventListener('touchend', handleInteraction, { once: true, passive: true });
+    document.addEventListener('scroll', handleInteraction, { once: true, passive: true });
+    window.addEventListener('focus', handleInteraction, { once: true });
 
     return () => {
       observer.disconnect();
-      document.removeEventListener('touchstart', handleTouch);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('touchend', handleInteraction);
+      document.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener('focus', handleInteraction);
     };
   }, []);
 
