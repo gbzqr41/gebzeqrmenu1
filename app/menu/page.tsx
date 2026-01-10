@@ -568,10 +568,11 @@ export default function Home() {
 
       {/* Category Buttons */}
       <div
-        className="overflow-x-auto px-[10px] mt-4 sticky top-0 bg-gray-50 z-10 py-2 shadow-sm"
+        className="overflow-x-auto px-[10px] mt-4 sticky top-0 bg-gray-50 z-10 py-2"
         style={{
           msOverflowStyle: 'none',
-          scrollbarWidth: 'none'
+          scrollbarWidth: 'none',
+          boxShadow: '0 4px 6px -4px rgba(0, 0, 0, 0.1)'
         }}
       >
         <div className="flex gap-1.5 min-w-max pr-[10px]">
